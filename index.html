@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>한국 브레드스</title>
+<meta name="robots" content="noindex, nofollow, noarchive">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#111827">
+<style>
+:root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--sub:#6b7280;--line:#e5e7eb;--grid:#eef0f3;--up:#e5484d;--dn:#3b82f6;--chip:#eef0f3;--chip-on:#111827;--chip-on-ink:#fff;--ref:#9ca3af;--fx-marker:#fde68a}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412}}
+:root[data-theme="dark"]{--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
+main{max-width:960px;margin:0 auto;padding:16px}
+h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
+.lead{font-size:13px;color:var(--sub);margin:0 2px 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:12px}
+.top{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:flex-end;justify-content:space-between}
+.big .k{font-size:13px;color:var(--sub)}
+.big .v{font-size:40px;font-weight:700;letter-spacing:-1px;line-height:1.1}
+.big .v i{font-size:16px;font-style:normal;font-weight:600;margin-left:6px;letter-spacing:0}
+.big .z{font-size:14px;margin-top:4px}
+.minis{display:flex;gap:10px}
+.mini{background:var(--chip);border-radius:10px;padding:8px 12px;min-width:96px}
+.mini span{display:block;font-size:12px;color:var(--sub)}
+.mini b{font-size:22px;letter-spacing:-.5px}
+.mini i{font-style:normal;font-size:13px;margin-left:4px}
+.up{color:var(--up)}.dn{color:var(--dn)}
+.bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:2px 0 10px}
+.bar .lab{font-size:12px;color:var(--sub);margin-right:2px}
+.chip{border:0;background:var(--chip);color:var(--ink);border-radius:999px;padding:6px 12px;font:inherit;font-size:13px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink);font-weight:600}
+.legend{font-size:13px;min-height:20px;color:var(--sub);margin:2px 2px 4px;font-variant-numeric:tabular-nums}
+.legend b{color:var(--ink)}
+#cb{height:320px}#cp{height:220px}
+.pt{font-size:13px;font-weight:600;margin:10px 2px 2px}
+.foot{font-size:12px;color:var(--sub);margin:14px 2px 24px;line-height:1.7}
+.foot p{margin:0 0 6px}
+.err{color:#dc2626;font-size:14px}
+@media (max-width:520px){.big .v{font-size:34px}#cb{height:280px}#cp{height:190px}.mini{min-width:0;flex:1}.minis{width:100%}}
+.fx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+.fx-caret{display:inline-block;width:.07em;height:1em;margin-left:.08em;vertical-align:-.12em;background:currentColor;animation:fx-blink 1s steps(1) infinite}
+@keyframes fx-blink{50%{opacity:0}}
+.fx-rot{display:inline-grid;vertical-align:bottom;overflow:hidden;padding:0 .2em;border-radius:.25em;
+  background:var(--fx-chip,rgba(37,99,235,.12));color:var(--fx-chip-ink,inherit)}
+.fx-rot>span{grid-area:1/1;text-align:center;transition:transform .5s cubic-bezier(.2,.7,.2,1),opacity .5s}
+.fx-rot>span.fx-in{transform:translateY(100%);opacity:0}
+.fx-rot>span.fx-out{transform:translateY(-100%);opacity:0}
+.fx-m{display:inline-block;overflow:hidden;vertical-align:bottom;padding-bottom:.1em;margin-bottom:-.1em}
+.fx-m>span,.fx-c,.fx-b{display:inline-block;white-space:pre}
+.fx-hw{transition:opacity .3s}
+.fx-hw.fx-dim{opacity:.28}
+.fx-mk{background-image:linear-gradient(transparent 56%,var(--fx-marker,#fde68a) 56%,var(--fx-marker,#fde68a) 92%,transparent 92%);
+  background-repeat:no-repeat;background-size:100% 100%;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.fx-mk.fx-mk-0{background-size:0% 100%}
+.fx-mk.fx-mk-go{transition:background-size .9s cubic-bezier(.3,.7,.2,1)}
+@media (prefers-reduced-motion:reduce){.fx-caret{animation:none}.fx-rot>span{transition:none}}
+
+</style>
+</head>
+<body>
+<main>
+<h1 data-fx="mask">한국 브레드스</h1>
+<p class="lead">코스피·코스닥 보통주 중 20일선 위에 있는 종목 비율(%) · 미국 MMTW의 한국판</p>
+
+<section class="card top">
+  <div class="big">
+    <div class="k">전체 2,524종목 · 2026-10-30(금) 종가</div>
+    <div class="v">10.7<i class="dn">-3.4</i></div>
+    <div class="z">시가 13.5 → 종가 10.7 · <span data-fx="marker">역대 하위 3%</span></div>
+  </div>
+  <div class="minis"><div class="mini"><span>코스피</span><b>11.3</b><i class="dn">-1.2</i></div><div class="mini"><span>코스닥</span><b>10.3</b><i class="dn">-4.4</i></div></div>
+</section>
+
+<section class="card">
+  <div class="bar" role="group" aria-label="브레드스 계열"><span class="lab">브레드스</span>
+    <button class="chip" data-g="all" aria-pressed="true">전체</button>
+    <button class="chip" data-g="kospi" aria-pressed="false">코스피</button>
+    <button class="chip" data-g="kosdaq" aria-pressed="false">코스닥</button>
+  </div>
+  <div class="bar" role="group" aria-label="기간"><span class="lab">기간</span>
+    <button class="chip" data-r="66" aria-pressed="false">3달</button>
+    <button class="chip" data-r="250" aria-pressed="true">1년</button>
+    <button class="chip" data-r="750" aria-pressed="false">3년</button>
+    <button class="chip" data-r="0" aria-pressed="false">전체</button>
+  </div>
+  <div class="legend" id="lb">&nbsp;</div>
+  <div id="cb"></div>
+  <div class="pt">가격</div>
+  <div class="bar" role="group" aria-label="가격 종목">
+    <button class="chip" data-p="KS11" aria-pressed="true">코스피</button>
+    <button class="chip" data-p="KQ11" aria-pressed="false">코스닥</button>
+    <button class="chip" data-p="122630" aria-pressed="false">KODEX 레버리지</button>
+    <button class="chip" data-p="233740" aria-pressed="false">코스닥150 레버리지</button>
+  </div>
+  <div class="legend" id="lp">&nbsp;</div>
+  <div id="cp"></div>
+  <p class="err" id="err" hidden></p>
+</section>
+
+<div class="foot">
+  <p>캔들은 시가 브레드스에서 종가 브레드스까지예요(꼬리 없음). 시가 브레드스 = 그날 시가가 «직전 19일 종가 + 그날 시가» 평균보다 위인 비율, 종가 브레드스 = 종가가 20일 종가 평균보다 위인 비율.</p>
+  <p>점선은 2015-01 이후 전체 계열의 하위 5%(14.0) · 가운데(43.9) · 상위 5%(76.6)예요. 차트를 왼쪽으로 끌거나 «전체»를 누르면 과거 값을 볼 수 있어요. 손가락이나 마우스를 올리면 그날 값이 위에 떠요.</p>
+  <p>대상은 오늘 상장된 보통주(스팩·우선주·리츠 제외)라 상장폐지 종목이 빠져 있어요. 2015~2026-08 상폐 280종목을 넣어 다시 재면 평균 0.6 낮았어요. 종가는 KRX 정규장 값(2026-09 이후 넥스트레이드 애프터마켓 가격을 걷어냄), 평일 16시쯤 갱신해요.</p>
+</div>
+</main>
+<script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
+<script>
+(function (G) {
+  "use strict";
+  var D = G.document;
+  var RM = !!(G.matchMedia && G.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  var K = 1;
+  var L0 = "ㄱㄲㄴㄷㄸㄹㅁㅂㅃㅅㅆㅇㅈㅉㅊㅋㅌㅍㅎ";
+  var HAN = "가나다라마바사아자차카타파하고노도로모보소오조초코토포호구누두루무부수우주추쿠투푸후";
+  var LAT = "ABCDEFGHJKLMNPQRSTUVWXYZ", DIG = "0123456789", SYM = "#&%$@*+=?";
+  function t(ms) { return ms * K; }
+  function orig(el) {
+    if (el.dataset.fxText == null) el.dataset.fxText = el.textContent;
+    return el.dataset.fxText;
+  }
+  function reset(el, text) {
+    el.textContent = "";
+    var sr = D.createElement("span"); sr.className = "fx-sr"; sr.textContent = text; el.appendChild(sr);
+  }
+  function hid(tag, cls) { var s = D.createElement(tag || "span"); if (cls) s.className = cls; s.setAttribute("aria-hidden", "true"); return s; }
+  function wordsOf(text) { return text.split(/(\s+)/).filter(function (x) { return x.length; }); }
+  function stopTimers(el) { (el._fxT || []).forEach(function (x) { clearTimeout(x); clearInterval(x); }); el._fxT = []; if (el._fxR) cancelAnimationFrame(el._fxR); }
+  function later(el, fn, ms) { (el._fxT = el._fxT || []).push(setTimeout(fn, ms)); }
+  function typeSteps(s, jamo) {
+    var out = [], pre = "";
+    for (var i = 0; i < s.length; i++) {
+      var c = s[i], code = s.charCodeAt(i) - 0xAC00;
+      if (jamo && code >= 0 && code < 11172) {
+        var l = Math.floor(code / 588), v = Math.floor((code % 588) / 28), tt = code % 28;
+        out.push(pre + L0[l]);
+        if (tt) out.push(pre + String.fromCharCode(0xAC00 + l * 588 + v * 28));
+      }
+      pre += c; out.push(pre);
+    }
+    return out;
+  }
+  function fxType(el) {
+    var s = orig(el), steps = typeSteps(s, el.dataset.jamo !== "0");
+    reset(el, s);
+    var box = hid("span"), caret = hid("span", "fx-caret");
+    el.appendChild(box); el.appendChild(caret);
+    var i = 0, step = t(s.length > 24 ? 35 : 60);
+    (function tick() {
+      box.textContent = steps[i++];
+      if (i < steps.length) later(el, tick, step);
+      else if (el.dataset.caret !== "keep") later(el, function () { caret.remove(); }, t(1600));
+    })();
+  }
+  function fxRotate(el) {
+    var ws = (el.dataset.words || orig(el)).split("|").map(function (x) { return x.trim(); }).filter(Boolean);
+    reset(el, ws.join(", "));
+    var box = hid("span", "fx-rot");
+    var spans = ws.map(function (w, k) { var x = D.createElement("span"); x.textContent = w; if (k) x.className = "fx-in"; box.appendChild(x); return x; });
+    el.appendChild(box);
+    if (RM || ws.length < 2) return;
+    var cur = 0, gap = +(el.dataset.every || 2200);
+    el._fxT.push(setInterval(function () {
+      var a = spans[cur], b = spans[(cur + 1) % spans.length];
+      b.style.transition = "none"; b.className = "fx-in"; void b.offsetWidth; b.style.transition = "";
+      a.className = "fx-out"; b.className = "";
+      cur = (cur + 1) % spans.length;
+    }, t(gap)));
+  }
+  function pieces(el, mode) {
+    var s = orig(el); reset(el, s);
+    var wrap = hid("span"); el.appendChild(wrap);
+    var list = [];
+    wordsOf(s).forEach(function (w) {
+      if (/^\s+$/.test(w)) { wrap.appendChild(D.createTextNode(w)); return; }
+      if (mode === "mask") { var m = D.createElement("span"); m.className = "fx-m"; var inner = D.createElement("span"); inner.textContent = w; m.appendChild(inner); wrap.appendChild(m); list.push(inner); }
+      else if (mode === "split") { var ww = D.createElement("span"); ww.style.whiteSpace = "nowrap"; Array.prototype.forEach.call(w, function (ch) { var c = D.createElement("span"); c.className = "fx-c"; c.textContent = ch; ww.appendChild(c); list.push(c); }); wrap.appendChild(ww); }
+      else { var b = D.createElement("span"); b.className = "fx-b"; b.textContent = w; wrap.appendChild(b); list.push(b); }
+    });
+    return list;
+  }
+  function animate(list, frames, dur, gap) {
+    if (!list.length || !list[0].animate) return;
+    list.forEach(function (x, k) { x.animate(frames, { duration: t(dur), delay: t(k * gap), easing: "cubic-bezier(.2,.7,.2,1)", fill: "backwards" }); });
+  }
+  function fxMask(el) { animate(pieces(el, "mask"), [{ transform: "translateY(105%)" }, { transform: "none" }], 700, 55); }
+  function fxSplit(el) { animate(pieces(el, "split"), [{ opacity: 0, transform: "translateY(.4em)" }, { opacity: 1, transform: "none" }], 520, 28); }
+  function fxBlur(el) { animate(pieces(el, "blur"), [{ opacity: 0, filter: "blur(10px)" }, { opacity: 1, filter: "blur(0)" }], 800, 70); }
+  function rnd(ch) {
+    var code = ch.charCodeAt(0);
+    var pool = (code >= 0xAC00 && code < 0xD7A4) ? HAN : /[0-9]/.test(ch) ? DIG : /[A-Za-z]/.test(ch) ? LAT : /\s/.test(ch) ? null : SYM;
+    return pool ? pool[Math.floor(Math.random() * pool.length)] : ch;
+  }
+  function fxScramble(el) {
+    var s = orig(el); reset(el, s);
+    var box = hid("span"); el.appendChild(box);
+    var start = performance.now(), hold = t(350), per = t(55), last = 0;
+    (function frame(now) {
+      var done = Math.max(0, Math.floor((now - start - hold) / per));
+      if (now - last > 45) {
+        last = now;
+        var o = "";
+        for (var i = 0; i < s.length; i++) o += i < done ? s[i] : rnd(s[i]);
+        box.textContent = o;
+      }
+      if (done < s.length) el._fxR = requestAnimationFrame(frame);
+      else box.textContent = s;
+    })(start);
+  }
+  var hlList = [];
+  function fxScrollHl(el) {
+    var s = orig(el); reset(el, s);
+    var wrap = hid("span"); el.appendChild(wrap);
+    var ws = [];
+    wordsOf(s).forEach(function (w) {
+      if (/^\s+$/.test(w)) { wrap.appendChild(D.createTextNode(w)); return; }
+      var x = D.createElement("span"); x.className = "fx-hw" + (RM ? "" : " fx-dim"); x.textContent = w; wrap.appendChild(x); ws.push(x);
+    });
+    if (RM) return;
+    hlList.push({ el: el, ws: ws });
+    hlUpdate();
+  }
+  function hlUpdate() {
+    var vh = G.innerHeight || 800;
+    hlList.forEach(function (o) {
+      var r = o.el.getBoundingClientRect();
+      var p = (vh * 0.85 - r.top) / (r.height + vh * 0.35);
+      var n = Math.round(Math.max(0, Math.min(1, p)) * o.ws.length);
+      o.ws.forEach(function (w, k) { w.classList.toggle("fx-dim", k >= n); });
+    });
+  }
+  G.addEventListener("scroll", function () { if (hlList.length) requestAnimationFrame(hlUpdate); }, { passive: true });
+  G.addEventListener("resize", function () { if (hlList.length) hlUpdate(); });
+  function fxMarker(el) {
+    el.classList.add("fx-mk");
+    if (RM) return;
+    el.classList.remove("fx-mk-go"); el.classList.add("fx-mk-0"); void el.offsetWidth;
+    el.classList.add("fx-mk-go"); el.classList.remove("fx-mk-0");
+  }
+  var FX = { type: fxType, rotate: fxRotate, mask: fxMask, split: fxSplit, scramble: fxScramble, blur: fxBlur, "scroll-hl": fxScrollHl, marker: fxMarker };
+  function play(el) {
+    var f = FX[el.dataset.fx];
+    if (!f) return;
+    stopTimers(el);
+    if (el.dataset.fx !== "marker" && el.dataset.fx !== "rotate" && el.dataset.fxText != null) el.textContent = el.dataset.fxText;
+    if (RM && el.dataset.fx !== "rotate" && el.dataset.fx !== "scroll-hl" && el.dataset.fx !== "marker") { orig(el); return; }
+    f(el);
+  }
+  function inView(el) { var r = el.getBoundingClientRect(); return r.bottom > 0 && r.top < (G.innerHeight || 800); }
+  var io = ("IntersectionObserver" in G) ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { io.unobserve(e.target); kick(e.target); } });
+  }, { threshold: 0 }) : null;
+  function kick(el) { var d = +(el.dataset.delay || 0); if (d) later(el, function () { play(el); }, d); else play(el); }
+  function run(root) {
+    Array.prototype.forEach.call((root || D).querySelectorAll("[data-fx]"), function (el) {
+      if (el._fxDone) return; el._fxDone = true; el._fxT = [];
+      var fx = el.dataset.fx;
+      if (fx === "rotate" || fx === "scroll-hl" || el.dataset.on === "load" || inView(el) || !io) kick(el);
+      else io.observe(el);
+    });
+  }
+  function clearFx(el, html) {
+    stopTimers(el);
+    if (html != null) el.innerHTML = html; else if (el.dataset.fxText != null) el.textContent = el.dataset.fxText;
+    ["data-fx", "data-fx-text", "data-words", "data-delay", "data-on", "data-caret", "data-jamo", "data-every"].forEach(function (a) { el.removeAttribute(a); });
+    el.classList.remove("fx-mk", "fx-mk-0", "fx-mk-go");
+    hlList = hlList.filter(function (o) { return o.el !== el; });
+    if (io) io.unobserve(el);
+    el._fxDone = false;
+  }
+  G.TextFX = { run: run, play: play, reset: clearFx, speed: function (k) { K = k > 0 ? k : 1; }, reduced: RM };
+  if (D.readyState === "loading") D.addEventListener("DOMContentLoaded", function () { run(); }); else run();
+})(window);
+
+</script>
+<script>
+(function(){
+var D=null,G="all",P="KS11",cb,cp,sb,sp,refs=[];
+function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
+function opts(h){return {height:h,autoSize:true,layout:{background:{type:"solid",color:css("--card")},textColor:css("--sub"),fontSize:11,attributionLogo:false},
+  grid:{vertLines:{color:css("--grid")},horzLines:{color:css("--grid")}},rightPriceScale:{borderColor:css("--line")},
+  timeScale:{borderColor:css("--line"),rightOffset:3,minBarSpacing:0.5},crosshair:{mode:0},localization:{locale:"ko-KR",dateFormat:"yyyy-MM-dd"},
+  handleScale:{axisPressedMouseMove:{time:true,price:false}}};}
+function candleOpts(){return {upColor:css("--up"),downColor:css("--dn"),borderUpColor:css("--up"),borderDownColor:css("--dn"),wickUpColor:css("--up"),wickDownColor:css("--dn")};}
+function bdata(){var b=D.b[G],out=[];for(var i=0;i<D.t.length;i++){var o=b.o[i],c=b.c[i];
+  if(c==null){out.push({time:D.t[i]});continue;} if(o==null)o=c; out.push({time:D.t[i],open:o,high:Math.max(o,c),low:Math.min(o,c),close:c});}return out;}
+function pdata(){var p=D.p[P],out=[];for(var i=0;i<D.t.length;i++){if(p.c[i]==null){out.push({time:D.t[i]});continue;}
+  out.push({time:D.t[i],open:p.o[i],high:p.h[i],low:p.l[i],close:p.c[i]});}return out;}
+function f1(x){return x==null?"-":x.toFixed(1);}
+function fp(x){if(x==null)return "-";return P.charAt(0)=="K"?x.toLocaleString("ko-KR",{minimumFractionDigits:2,maximumFractionDigits:2}):x.toLocaleString("ko-KR")+"원";}
+function idxOf(t){var lo=0,hi=D.t.length-1;while(lo<=hi){var m=(lo+hi)>>1;if(D.t[m]<t)lo=m+1;else if(D.t[m]>t)hi=m-1;else return m;}return -1;}
+function legend(i){if(i<0)i=D.t.length-1;var b=D.b[G],nm={all:"전체",kospi:"코스피",kosdaq:"코스닥"}[G];
+  var d=(i>0&&b.c[i-1]!=null&&b.c[i]!=null)?b.c[i]-b.c[i-1]:null;
+  document.getElementById("lb").innerHTML=D.t[i]+" · "+nm+" 시가 "+f1(b.o[i])+" → 종가 <b>"+f1(b.c[i])+"</b>"+(d==null?"":" <span class='"+(d>=0?"up":"dn")+"'>("+(d>=0?"+":"")+d.toFixed(1)+")</span>");
+  var p=D.p[P],c=p.c[i],j=i-1;while(j>=0&&p.c[j]==null)j--;var r=(c!=null&&j>=0)?(c/p.c[j]-1)*100:null;
+  document.getElementById("lp").innerHTML=p.name+" · 종가 <b>"+fp(c)+"</b>"+(r==null?"":" <span class='"+(r>=0?"up":"dn")+"'>("+(r>=0?"+":"")+r.toFixed(2)+"%)</span>");}
+function setRefs(){refs.forEach(function(r){sb.removePriceLine(r);});refs=[];
+  [["p5","하위5%"],["p50","가운데"],["p95","상위5%"]].forEach(function(q){refs.push(sb.createPriceLine({price:D.q[q[0]],color:css("--ref"),lineWidth:1,lineStyle:2,axisLabelVisible:true,title:q[1]}));});}
+function range(n){var L=D.t.length;var ts=cb.timeScale();if(!n)ts.fitContent();else ts.setVisibleLogicalRange({from:L-n,to:L+2});}
+function press(sel,el){document.querySelectorAll(sel).forEach(function(b){b.setAttribute("aria-pressed",b===el?"true":"false");});}
+function build(){
+  cb=LightweightCharts.createChart(document.getElementById("cb"),opts(document.getElementById("cb").clientHeight));
+  cp=LightweightCharts.createChart(document.getElementById("cp"),opts(document.getElementById("cp").clientHeight));
+  sb=cb.addCandlestickSeries(Object.assign(candleOpts(),{wickVisible:false,priceFormat:{type:"price",precision:1,minMove:0.1},autoscaleInfoProvider:function(){return {priceRange:{minValue:0,maxValue:100}};}}));
+  sp=cp.addCandlestickSeries(candleOpts());
+  sb.setData(bdata());sp.setData(pdata());setRefs();
+  var lock=false;
+  function link(a,b){a.timeScale().subscribeVisibleLogicalRangeChange(function(r){if(!r||lock)return;lock=true;b.timeScale().setVisibleLogicalRange(r);lock=false;});}
+  link(cb,cp);link(cp,cb);
+  function cross(src,dst,dstS,isB){src.subscribeCrosshairMove(function(pr){if(!pr||!pr.time){dst.clearCrosshairPosition();legend(-1);return;}
+    var i=idxOf(pr.time);legend(i);var v=isB?D.p[P].c[i]:D.b[G].c[i];if(v==null){dst.clearCrosshairPosition();return;}dst.setCrosshairPosition(v,pr.time,dstS);});}
+  cross(cb,cp,sp,true);cross(cp,cb,sb,false);
+  range(250);legend(-1);
+  document.querySelectorAll("[data-g]").forEach(function(b){b.onclick=function(){G=b.dataset.g;press("[data-g]",b);var r=cb.timeScale().getVisibleLogicalRange();sb.setData(bdata());if(r)cb.timeScale().setVisibleLogicalRange(r);legend(-1);};});
+  document.querySelectorAll("[data-p]").forEach(function(b){b.onclick=function(){P=b.dataset.p;press("[data-p]",b);var r=cb.timeScale().getVisibleLogicalRange();sp.setData(pdata());if(r)cp.timeScale().setVisibleLogicalRange(r);legend(-1);};});
+  document.querySelectorAll("[data-r]").forEach(function(b){b.onclick=function(){press("[data-r]",b);range(+b.dataset.r);};});
+  var mq=window.matchMedia("(prefers-color-scheme: dark)");
+  function retheme(){[cb,cp].forEach(function(c,k){c.applyOptions(opts(document.getElementById(k?"cp":"cb").clientHeight));});sb.applyOptions(candleOpts());sp.applyOptions(candleOpts());setRefs();}
+  if(mq.addEventListener)mq.addEventListener("change",retheme);
+}
+fetch("data.json?v="+Date.now()).then(function(r){return r.json();}).then(function(j){D=j;build();}).catch(function(e){var el=document.getElementById("err");el.hidden=false;el.textContent="자료를 못 불러왔어요: "+e;});
+})();
+</script>
+</body>
+</html>
