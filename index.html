@@ -86,7 +86,7 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
   <h2>브레드스 5 밑 «극악» 사건</h2>
   <p class="st">대기 중: 지금 전체 10.7 · 마지막 사건 2026-06-08 · 2026-06-15에 20 위로 회복해 다음 사건을 받는 상태 · 그 뒤 가장 낮았던 날 2026-06-23 6.8</p>
   <div class="evs" id="evs"></div>
-  <p class="rule">누르면 그 날짜 앞뒤로 두 차트가 같이 움직여요. 아래 가격 창에서 KODEX 레버리지·코스닥150 레버리지를 고르면 규칙대로 산 날(▲)과 판 날(▼)이 보여요. 규칙: 전체 브레드스가 5 밑인 날 → 다음 날 시가 매수 → +20% 익절, 손절 없음, 최대 1년 · 브레드스가 20 위로 회복해야 다음 사건.</p>
+  <p class="rule">누르면 그 날짜 앞뒤로 두 차트가 같이 움직여요. 아래 가격 창에서 KODEX 레버리지·코스닥150 레버리지를 고르면 규칙대로 산 날(▲)과 판 날(▼)이 보여요. 규칙: 전체 브레드스가 5 밑인 날 → 다음 날 시가 매수 → KODEX 레버리지는 +25% 익절(손절 없음, 최대 1년), 코스닥150 레버리지는 3거래일째 종가에 정리 · 브레드스가 20 위로 회복해야 다음 사건.</p>
 </section>
 
 <section class="card">
@@ -308,7 +308,7 @@ function bmarks(){var k=idxOf(D.c0),a=[],b=[];D.ev.forEach(function(e){var m={ti
   if(idxOf(e.d)<k)a.push(m);else b.push(m);});sl.setMarkers(a);sb.setMarkers(b);}
 function pmarks(){var ms=[];var tr=D.tr[P];
   if(tr){tr.forEach(function(x){ms.push({time:x.in,position:"belowBar",color:css("--up"),shape:"arrowUp",text:"매수"});
-    if(x.out)ms.push({time:x.out,position:"aboveBar",color:css("--dn"),shape:"arrowDown",text:(x.how=="익절"?"익절 ":"만기 ")+(x.ret>=0?"+":"")+x.ret+"%"});});}
+    if(x.out)ms.push({time:x.out,position:"aboveBar",color:css("--dn"),shape:"arrowDown",text:x.how+" "+(x.ret>=0?"+":"")+x.ret+"%"});});}
   else{D.ev.forEach(function(e){ms.push({time:e.d,position:"belowBar",color:css("--up"),shape:"arrowUp",text:"5 밑"});});}
   ms.sort(function(a,b){return a.time<b.time?-1:1;});sp.setMarkers(ms);}
 function jump(d){var i=idxOf(d);if(i<0)return;if(D.tr[P]&&D.p[P].c[i+1]==null){P=(P=="122630")?"KS11":"KQ11";press("[data-p]",document.querySelector('[data-p="'+P+'"]'));pfmt();sp.setData(pdata());pmarks();}
