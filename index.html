@@ -40,6 +40,13 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 .foot{font-size:12px;color:var(--sub);margin:14px 2px 24px;line-height:1.7}
 .foot p{margin:0 0 6px}
 .err{color:#dc2626;font-size:14px}
+.ev h2{font-size:15px;margin:0 0 4px}
+.ev .st{font-size:13px;color:var(--sub);margin:0 0 10px}
+.ev .st b{color:var(--ink)}
+.evs{display:flex;flex-wrap:wrap;gap:6px}
+.evs .chip{font-variant-numeric:tabular-nums}
+.evs .chip i{font-style:normal;color:var(--up);margin-left:4px;font-weight:600}
+.rule{font-size:12px;color:var(--sub);margin:10px 0 0;line-height:1.6}
 @media (max-width:520px){.big .v{font-size:34px}#cb{height:280px}#cp{height:190px}.mini{min-width:0;flex:1}.minis{width:100%}}
 .fx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .fx-caret{display:inline-block;width:.07em;height:1em;margin-left:.08em;vertical-align:-.12em;background:currentColor;animation:fx-blink 1s steps(1) infinite}
@@ -70,9 +77,16 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
   <div class="big">
     <div class="k">전체 2,524종목 · 2026-10-30(금) 종가</div>
     <div class="v">10.7<i class="dn">-3.4</i></div>
-    <div class="z">시가 13.5 → 종가 10.7 · <span data-fx="marker">역대 하위 3%</span></div>
+    <div class="z">시가 13.5 → 종가 10.7 · <span data-fx="marker">역대 하위 2%</span></div>
   </div>
   <div class="minis"><div class="mini"><span>코스피</span><b>11.3</b><i class="dn">-1.2</i></div><div class="mini"><span>코스닥</span><b>10.3</b><i class="dn">-4.4</i></div></div>
+</section>
+
+<section class="card ev">
+  <h2>브레드스 5 밑 «극악» 사건</h2>
+  <p class="st">대기 중: 지금 전체 10.7 · 마지막 사건 2026-06-08 · 2026-06-15에 20 위로 회복해 다음 사건을 받는 상태 · 그 뒤 가장 낮았던 날 2026-06-23 6.8</p>
+  <div class="evs" id="evs"></div>
+  <p class="rule">누르면 그 날짜 앞뒤로 두 차트가 같이 움직여요. 아래 가격 창에서 KODEX 레버리지·코스닥150 레버리지를 고르면 규칙대로 산 날(▲)과 판 날(▼)이 보여요. 규칙: 전체 브레드스가 5 밑인 날 → 다음 날 시가 매수 → +20% 익절, 손절 없음, 최대 1년 · 브레드스가 20 위로 회복해야 다음 사건.</p>
 </section>
 
 <section class="card">
@@ -103,7 +117,7 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 
 <div class="foot">
   <p>캔들은 시가 브레드스에서 종가 브레드스까지예요(꼬리 없음). 시가 브레드스 = 그날 시가가 «직전 19일 종가 + 그날 시가» 평균보다 위인 비율, 종가 브레드스 = 종가가 20일 종가 평균보다 위인 비율.</p>
-  <p>점선은 2015-01 이후 전체 계열의 하위 5%(14.0) · 가운데(43.9) · 상위 5%(76.6)예요. 차트를 왼쪽으로 끌거나 «전체»를 누르면 과거 값을 볼 수 있어요. 손가락이나 마우스를 올리면 그날 값이 위에 떠요.</p>
+  <p>2015년 전(2002-01~)은 상장폐지 645종목을 넣어 다시 만든 종가 브레드스라 선으로만 보여요(2002~2005 상폐 일부는 자료가 없어 빠졌어요). 빨간 실선이 5, 점선은 2002-01 이후 전체 계열의 하위 5%(15.0) · 가운데(44.9) · 상위 5%(75.7)예요. 차트를 왼쪽으로 끌거나 «전체»를 누르면 과거 값을 볼 수 있어요. 손가락이나 마우스를 올리면 그날 값이 위에 떠요.</p>
   <p>대상은 오늘 상장된 보통주(스팩·우선주·리츠 제외)라 상장폐지 종목이 빠져 있어요. 2015~2026-08 상폐 280종목을 넣어 다시 재면 평균 0.6 낮았어요. 종가는 KRX 정규장 값(2026-09 이후 넥스트레이드 애프터마켓 가격을 걷어냄), 평일 16시쯤 갱신해요.</p>
 </div>
 </main>
@@ -278,7 +292,7 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 </script>
 <script>
 (function(){
-var D=null,G="all",P="KS11",cb,cp,sb,sp,refs=[];
+var D=null,G="all",P="KS11",cb,cp,sb,sl,sp,refs=[];
 function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
 function tick(t,k){var d=typeof t==="string"?t.split("-"):[t.year,t.month,t.day];if(k===0)return String(d[0]);if(k===1)return (+d[1])+"월";return (+d[1])+"/"+(+d[2]);}
 function opts(h){return {height:h,autoSize:true,layout:{background:{type:"solid",color:css("--card")},textColor:css("--sub"),fontSize:11,attributionLogo:false},
@@ -287,7 +301,20 @@ function opts(h){return {height:h,autoSize:true,layout:{background:{type:"solid"
   handleScale:{axisPressedMouseMove:{time:true,price:false}}};}
 function candleOpts(){return {upColor:css("--up"),downColor:css("--dn"),borderUpColor:css("--up"),borderDownColor:css("--dn"),wickUpColor:css("--up"),wickDownColor:css("--dn")};}
 function bdata(){var b=D.b[G],out=[];for(var i=0;i<D.t.length;i++){var o=b.o[i],c=b.c[i];
-  if(c==null){out.push({time:D.t[i]});continue;} if(o==null)o=c; out.push({time:D.t[i],open:o,high:Math.max(o,c),low:Math.min(o,c),close:c});}return out;}
+  if(c==null||o==null){out.push({time:D.t[i]});continue;} out.push({time:D.t[i],open:o,high:Math.max(o,c),low:Math.min(o,c),close:c});}return out;}
+function ldata(){var b=D.b[G],out=[],k=idxOf(D.c0);for(var i=0;i<D.t.length;i++){var c=b.c[i];
+  if(c==null||i>k){out.push({time:D.t[i]});continue;} out.push({time:D.t[i],value:c});}return out;}
+function bmarks(){var k=idxOf(D.c0),a=[],b=[];D.ev.forEach(function(e){var m={time:e.d,position:"belowBar",color:css("--up"),shape:"arrowUp",text:"5 밑 "+e.v};
+  if(idxOf(e.d)<k)a.push(m);else b.push(m);});sl.setMarkers(a);sb.setMarkers(b);}
+function pmarks(){var ms=[];var tr=D.tr[P];
+  if(tr){tr.forEach(function(x){ms.push({time:x.in,position:"belowBar",color:css("--up"),shape:"arrowUp",text:"매수"});
+    if(x.out)ms.push({time:x.out,position:"aboveBar",color:css("--dn"),shape:"arrowDown",text:(x.how=="익절"?"익절 ":"만기 ")+(x.ret>=0?"+":"")+x.ret+"%"});});}
+  else{D.ev.forEach(function(e){ms.push({time:e.d,position:"belowBar",color:css("--up"),shape:"arrowUp",text:"5 밑"});});}
+  ms.sort(function(a,b){return a.time<b.time?-1:1;});sp.setMarkers(ms);}
+function jump(d){var i=idxOf(d);if(i<0)return;if(D.tr[P]&&D.p[P].c[i+1]==null){P=(P=="122630")?"KS11":"KQ11";press("[data-p]",document.querySelector('[data-p="'+P+'"]'));pfmt();sp.setData(pdata());pmarks();}
+  press("[data-r]",null);cb.timeScale().setVisibleLogicalRange({from:i-90,to:i+170});legend(i);}
+function evchips(){var box=document.getElementById("evs");D.ev.forEach(function(e){var b=document.createElement("button");b.className="chip";b.type="button";
+  b.innerHTML=e.d+"<i>"+e.v+"</i>";b.onclick=function(){jump(e.d);};box.appendChild(b);});}
 function pdata(){var p=D.p[P],out=[];for(var i=0;i<D.t.length;i++){if(p.c[i]==null){out.push({time:D.t[i]});continue;}
   out.push({time:D.t[i],open:p.o[i],high:p.h[i],low:p.l[i],close:p.c[i]});}return out;}
 function pfmt(){var k=P.charAt(0)=="K";sp.applyOptions({priceFormat:{type:"price",precision:k?2:0,minMove:k?0.01:5}});}
@@ -300,7 +327,8 @@ function legend(i){if(i<0)i=D.t.length-1;var b=D.b[G],nm={all:"전체",kospi:"�
   var p=D.p[P],c=p.c[i],j=i-1;while(j>=0&&p.c[j]==null)j--;var r=(c!=null&&j>=0)?(c/p.c[j]-1)*100:null;
   document.getElementById("lp").innerHTML=p.name+" · 종가 <b>"+fp(c)+"</b>"+(r==null?"":" <span class='"+(r>=0?"up":"dn")+"'>("+(r>=0?"+":"")+r.toFixed(2)+"%)</span>");}
 function setRefs(){refs.forEach(function(r){sb.removePriceLine(r);});refs=[];
-  [["p5","하위5%"],["p50","가운데"],["p95","상위5%"]].forEach(function(q){refs.push(sb.createPriceLine({price:D.q[q[0]],color:css("--ref"),lineWidth:1,lineStyle:2,axisLabelVisible:true,title:q[1]}));});}
+  [["p5","하위5%"],["p50","가운데"],["p95","상위5%"]].forEach(function(q){refs.push(sb.createPriceLine({price:D.q[q[0]],color:css("--ref"),lineWidth:1,lineStyle:2,axisLabelVisible:true,title:q[1]}));});
+  refs.push(sb.createPriceLine({price:5,color:css("--up"),lineWidth:1,lineStyle:0,axisLabelVisible:true,title:"극악 5"}));}
 function range(n){var L=D.t.length;var ts=cb.timeScale();if(!n)ts.fitContent();else ts.setVisibleLogicalRange({from:L-n,to:L+2});}
 function press(sel,el){document.querySelectorAll(sel).forEach(function(b){b.setAttribute("aria-pressed",b===el?"true":"false");});}
 function build(){
@@ -308,10 +336,11 @@ function build(){
   cp=LightweightCharts.createChart(document.getElementById("cp"),opts(document.getElementById("cp").clientHeight));
   sb=cb.addCandlestickSeries(Object.assign(candleOpts(),{wickVisible:false,priceFormat:{type:"price",precision:1,minMove:0.1},autoscaleInfoProvider:function(){return {priceRange:{minValue:0,maxValue:100}};}}));
   sp=cp.addCandlestickSeries(candleOpts());
+  sl=cb.addLineSeries({color:css("--sub"),lineWidth:1,priceLineVisible:false,lastValueVisible:false,crosshairMarkerVisible:false,autoscaleInfoProvider:function(){return {priceRange:{minValue:0,maxValue:100}};}});
   cb.priceScale("right").applyOptions({scaleMargins:{top:0.04,bottom:0.04}});
   cp.priceScale("right").applyOptions({mode:1});
   pfmt();
-  sb.setData(bdata());sp.setData(pdata());setRefs();
+  sb.setData(bdata());sl.setData(ldata());sp.setData(pdata());setRefs();bmarks();pmarks();evchips();
   var lock=false;
   function link(a,b){a.timeScale().subscribeVisibleLogicalRangeChange(function(r){if(!r||lock)return;lock=true;b.timeScale().setVisibleLogicalRange(r);lock=false;});}
   link(cb,cp);link(cp,cb);
@@ -319,11 +348,11 @@ function build(){
     var i=idxOf(pr.time);legend(i);var v=isB?D.p[P].c[i]:D.b[G].c[i];if(v==null){dst.clearCrosshairPosition();return;}dst.setCrosshairPosition(v,pr.time,dstS);});}
   cross(cb,cp,sp,true);cross(cp,cb,sb,false);
   range(250);legend(-1);
-  document.querySelectorAll("[data-g]").forEach(function(b){b.onclick=function(){G=b.dataset.g;press("[data-g]",b);var r=cb.timeScale().getVisibleLogicalRange();sb.setData(bdata());if(r)cb.timeScale().setVisibleLogicalRange(r);legend(-1);};});
-  document.querySelectorAll("[data-p]").forEach(function(b){b.onclick=function(){P=b.dataset.p;press("[data-p]",b);var r=cb.timeScale().getVisibleLogicalRange();pfmt();sp.setData(pdata());if(r)cp.timeScale().setVisibleLogicalRange(r);legend(-1);};});
+  document.querySelectorAll("[data-g]").forEach(function(b){b.onclick=function(){G=b.dataset.g;press("[data-g]",b);var r=cb.timeScale().getVisibleLogicalRange();sb.setData(bdata());sl.setData(ldata());bmarks();if(r)cb.timeScale().setVisibleLogicalRange(r);legend(-1);};});
+  document.querySelectorAll("[data-p]").forEach(function(b){b.onclick=function(){P=b.dataset.p;press("[data-p]",b);var r=cb.timeScale().getVisibleLogicalRange();pfmt();sp.setData(pdata());pmarks();if(r)cp.timeScale().setVisibleLogicalRange(r);legend(-1);};});
   document.querySelectorAll("[data-r]").forEach(function(b){b.onclick=function(){press("[data-r]",b);range(+b.dataset.r);};});
   var mq=window.matchMedia("(prefers-color-scheme: dark)");
-  function retheme(){[cb,cp].forEach(function(c,k){c.applyOptions(opts(document.getElementById(k?"cp":"cb").clientHeight));});sb.applyOptions(candleOpts());sp.applyOptions(candleOpts());setRefs();}
+  function retheme(){[cb,cp].forEach(function(c,k){c.applyOptions(opts(document.getElementById(k?"cp":"cb").clientHeight));});sb.applyOptions(candleOpts());sp.applyOptions(candleOpts());sl.applyOptions({color:css("--sub")});setRefs();bmarks();pmarks();}
   if(mq.addEventListener)mq.addEventListener("change",retheme);
 }
 fetch("data.json?v="+Date.now()).then(function(r){return r.json();}).then(function(j){D=j;build();}).catch(function(e){var el=document.getElementById("err");el.hidden=false;el.textContent="자료를 못 불러왔어요: "+e;});
