@@ -9,9 +9,9 @@
 <meta name="theme-color" content="#111827">
 <link rel="icon" href="data:,">
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--sub:#6b7280;--line:#e5e7eb;--grid:#eef0f3;--up:#e5484d;--dn:#3b82f6;--chip:#eef0f3;--chip-on:#111827;--chip-on-ink:#fff;--ref:#9ca3af;--fx-marker:#fde68a;--us:#c2410c}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c}}
-:root[data-theme="dark"]{--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c}
+:root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--sub:#6b7280;--line:#e5e7eb;--grid:#eef0f3;--up:#e5484d;--dn:#3b82f6;--chip:#eef0f3;--chip-on:#111827;--chip-on-ink:#fff;--ref:#9ca3af;--fx-marker:#fde68a;--us:#c2410c;--warn:#ca8a04}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c;--warn:#facc15}}
+:root[data-theme="dark"]{--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c;--warn:#facc15}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
 main{max-width:960px;margin:0 auto;padding:16px}
@@ -125,6 +125,7 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
   <div class="legend" id="lm">&nbsp;</div>
   <div id="cm"></div>
   <p class="rule">위 두 차트와 날짜 이동·십자선이 같이 움직여요. 날짜는 미국 날짜 그대로라, 같은 날짜의 한국 장이 끝난 뒤에 열린 미국 장 값이에요(한국 오늘 봉은 미국 «어제» 값을 보고 움직여요). 트뷰 INDEX:MMTW 확정값으로 평일 16시쯤 갱신해요.</p>
+  <p class="rule" id="mqn" hidden></p>
 </section>
 
 <div class="foot">
@@ -336,9 +337,17 @@ function poll(){getLive().then(function(j){if(!applyLive(j))return;var r=cb.time
 function mdata(){var out=[];for(var i=0;i<D.t.length;i++){var v=D.m[i];out.push(v==null?{time:D.t[i]}:{time:D.t[i],value:v});}return out;}
 function mlegend(i){if(!sm)return;if(i<0){i=D.t.length-1;while(i>0&&D.m[i]==null)i--;}var v=D.m[i],j=i-1;while(j>=0&&D.m[j]==null)j--;
   var d=(v!=null&&j>=0)?v-D.m[j]:null,k=D.b[G].c[i],nm={all:"전체",kospi:"코스피",kosdaq:"코스닥"}[G];
-  document.getElementById("lm").innerHTML=D.t[i]+" · 미국 MMTW <b class='us'>"+f1(v)+"</b>"+(d==null?"":" <span class='"+(d>=0?"up":"dn")+"'>("+(d>=0?"+":"")+d.toFixed(1)+")</span>")+" · 한국 "+nm+" "+f1(k);}
-function setMRefs(){mrefs.forEach(function(r){sm.removePriceLine(r);});mrefs=[];
-  [20,50,80].forEach(function(v){mrefs.push(sm.createPriceLine({price:v,color:css("--ref"),lineWidth:1,lineStyle:2,axisLabelVisible:true,title:String(v)}));});}
+  var r=mrank(v);
+  document.getElementById("lm").innerHTML=D.t[i]+" · 미국 MMTW <b class='us'>"+f1(v)+"</b>"+(d==null?"":" <span class='"+(d>=0?"up":"dn")+"'>("+(d>=0?"+":"")+d.toFixed(1)+")</span>")+(r==null?"":" · 하위 "+fpct(r)+"%")+" · 한국 "+nm+" "+f1(k);}
+// 11/06 11544: 20·10(v14 부스터 기준)은 실선 + «하위 N%» = 미국 거래일 중 그 값 밑이었던 날 비율(D.mq.lt, 빌드 때 셈)
+function mrank(v){var q=D.mq&&D.mq.pc;if(!q||v==null)return null;if(v<=q[0])return 0;
+  for(var k=1;k<q.length;k++){if(v<q[k]){var a=q[k-1],b=q[k];return (k-1+(b>a?(v-a)/(b-a):0))*0.5;}}return 100;}
+function fpct(x){return x<10?x.toFixed(1):String(Math.round(x));}
+function setMRefs(){mrefs.forEach(function(r){sm.removePriceLine(r);});mrefs=[];var lt=(D.mq&&D.mq.lt)||{};
+  [50,80].forEach(function(v){mrefs.push(sm.createPriceLine({price:v,color:css("--ref"),lineWidth:1,lineStyle:2,axisLabelVisible:true,title:String(v)}));});
+  [[20,"--warn"],[10,"--up"]].forEach(function(a){var p=lt[a[0]];mrefs.push(sm.createPriceLine({price:a[0],color:css(a[1]),lineWidth:1,lineStyle:0,axisLabelVisible:true,title:a[0]+(p==null?"":" · 하위 "+fpct(p)+"%")}));});}
+function mqnote(){var e=document.getElementById("mqn"),q=D.mq;if(!q||!q.lt)return;
+  e.innerHTML="<b style='color:var(--warn)'>노란 선 20</b> · <b class='up'>빨간 선 10</b> 옆 숫자는 "+q.f.slice(0,4)+"년 이후 미국 거래일 "+q.n.toLocaleString("ko-KR")+"일 중 MMTW가 그 값 밑이었던 날 비율이에요. 20 밑 <b>"+fpct(q.lt["20"])+"%</b> · 10 밑 <b>"+fpct(q.lt["10"])+"%</b>. 범례의 «하위 N%»는 그날 값이 몇 번째로 낮은지예요.";e.hidden=false;}
 function ldata(){var b=D.b[G],out=[],k=idxOf(D.c0);for(var i=0;i<D.t.length;i++){var c=b.c[i];
   if(c==null||i>k){out.push({time:D.t[i]});continue;} out.push({time:D.t[i],value:c});}return out;}
 function bmarks(){var k=idxOf(D.c0),a=[],b=[];D.ev.forEach(function(e){var m={time:e.d,position:"belowBar",color:css("--up"),shape:"arrowUp",text:"5 밑 "+e.v};
@@ -384,7 +393,7 @@ function build(){
     cm=LightweightCharts.createChart(document.getElementById("cm"),opts(document.getElementById("cm").clientHeight));
     sm=cm.addLineSeries({color:css("--us"),lineWidth:2,priceLineVisible:false,lastValueVisible:true,priceFormat:{type:"price",precision:1,minMove:0.1},autoscaleInfoProvider:function(){return {priceRange:{minValue:0,maxValue:100}};}});
     cm.priceScale("right").applyOptions({scaleMargins:{top:0.04,bottom:0.04}});
-    sm.setData(mdata());setMRefs();
+    sm.setData(mdata());setMRefs();mqnote();
   }else{document.getElementById("mcard").hidden=true;}
   // 세 차트(브레드스·가격·MMTW)는 D.t 같은 칸 수라 논리 범위·십자선을 그대로 맞춘다 (11/06 MMTW 칸 추가로 둘 → 셋)
   var lock=false,CH=[{c:cb,s:sb,v:function(i){return D.b[G].c[i];}},{c:cp,s:sp,v:function(i){return D.p[P].c[i];}}];
