@@ -9,9 +9,9 @@
 <meta name="theme-color" content="#111827">
 <link rel="icon" href="data:,">
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--sub:#6b7280;--line:#e5e7eb;--grid:#eef0f3;--up:#e5484d;--dn:#3b82f6;--chip:#eef0f3;--chip-on:#111827;--chip-on-ink:#fff;--ref:#9ca3af;--fx-marker:#fde68a;--us:#c2410c;--warn:#ca8a04}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c;--warn:#facc15}}
-:root[data-theme="dark"]{--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c;--warn:#facc15}
+:root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--sub:#6b7280;--line:#e5e7eb;--grid:#eef0f3;--up:#e5484d;--dn:#3b82f6;--chip:#eef0f3;--chip-on:#111827;--chip-on-ink:#fff;--ref:#9ca3af;--fx-marker:#fde68a;--us:#c2410c;--warn:#ca8a04;--nf:#7c3aed;--band:#ea580c2e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c;--warn:#facc15;--nf:#a78bfa;--band:#fb923c33}}
+:root[data-theme="dark"]{--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c;--warn:#facc15;--nf:#a78bfa;--band:#fb923c33}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
 main{max-width:960px;margin:0 auto;padding:16px}
@@ -35,8 +35,8 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 .chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink);font-weight:600}
 .legend{font-size:13px;min-height:20px;color:var(--sub);margin:2px 2px 4px;font-variant-numeric:tabular-nums}
 .legend b{color:var(--ink)}
-#cb{height:320px}#cp{height:220px}#cm{height:220px}
-.legend b.us{color:var(--us)}
+#cb{height:320px}#cp{height:220px}#cm,#cn{height:220px}
+.legend b.us{color:var(--us)}.legend b.nf{color:var(--nf)}.legend .non{color:var(--up);font-weight:700}
 .pt{font-size:13px;font-weight:600;margin:10px 2px 2px}
 .foot{font-size:12px;color:var(--sub);margin:14px 2px 24px;line-height:1.7}
 .foot p{margin:0 0 6px}
@@ -51,7 +51,7 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 :root{--live:#f59e0b}
 .live{flex-basis:100%;font-size:13px;color:var(--sub);border-top:1px dashed var(--line);padding-top:8px;font-variant-numeric:tabular-nums}
 .live b{color:var(--ink)}.live b.up{color:var(--up)}.lv{color:var(--live);font-weight:600}
-@media (max-width:520px){.big .v{font-size:34px}#cb{height:280px}#cp{height:190px}#cm{height:190px}.mini{min-width:0;flex:1}.minis{width:100%}}
+@media (max-width:520px){.big .v{font-size:34px}#cb{height:280px}#cp{height:190px}#cm,#cn{height:190px}.mini{min-width:0;flex:1}.minis{width:100%}}
 .fx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .fx-caret{display:inline-block;width:.07em;height:1em;margin-left:.08em;vertical-align:-.12em;background:currentColor;animation:fx-blink 1s steps(1) infinite}
 @keyframes fx-blink{50%{opacity:0}}
@@ -126,6 +126,14 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
   <div id="cm"></div>
   <p class="rule">위 두 차트와 날짜 이동·십자선이 같이 움직여요. 날짜는 미국 날짜 그대로라, 같은 날짜의 한국 장이 끝난 뒤에 열린 미국 장 값이에요(한국 오늘 봉은 미국 «어제» 값을 보고 움직여요). 트뷰 INDEX:MMTW 확정값으로 평일 16시쯤 갱신해요.</p>
   <p class="rule" id="mqn" hidden></p>
+</section>
+
+<section class="card" id="ncard">
+  <div class="pt" style="margin-top:0">미국 NFCI 리스크 <span style="font-weight:400;color:var(--sub)">(금융 여건 위험 · 최근 3년 중 몇 % 자리)</span></div>
+  <div class="legend" id="ln">&nbsp;</div>
+  <div id="cn"></div>
+  <p class="rule">시카고 연은이 매주 내는 미국 금융 여건 지수의 «위험» 부분(FRED NFCIRISK)이에요. 0이 평균이고 높을수록 돈줄이 빡빡해요. 선은 지금 값이 최근 3년 중 몇 % 자리인지예요. 빨간 선 80을 넘으면 적립 규칙의 NFCI 축소(보유 절반 덜기), 80 밑으로 내려오면 되사기예요(축소 뒤 90일 안엔 다시 안 덜어요). 주황 음영이 그렇게 켜져 있던 기간이에요. 금요일 기준 값이 다음 주에 나와서 기준일 + 7일에 맞췄어요.</p>
+  <p class="rule" id="nqn"></p>
 </section>
 
 <div class="foot">
@@ -305,11 +313,11 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 </script>
 <script>
 (function(){
-var D=null,G="all",P="KS11",cb,cp,cm=null,sb,sl,sp,sm=null,refs=[],mrefs=[],L=null,LI=-1;
+var D=null,G="all",P="KS11",cb,cp,cm=null,sb,sl,sp,sm=null,refs=[],mrefs=[],cn=null,sn=null,snb=null,nrefs=[],L=null,LI=-1;
 function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
 function tick(t,k){var d=typeof t==="string"?t.split("-"):[t.year,t.month,t.day];if(k===0)return String(d[0]);if(k===1)return (+d[1])+"월";return (+d[1])+"/"+(+d[2]);}
 function opts(h){return {height:h,autoSize:true,layout:{background:{type:"solid",color:css("--card")},textColor:css("--sub"),fontSize:11,attributionLogo:false},
-  grid:{vertLines:{color:css("--grid")},horzLines:{color:css("--grid")}},rightPriceScale:{borderColor:css("--line")},
+  grid:{vertLines:{color:css("--grid")},horzLines:{color:css("--grid")}},rightPriceScale:{borderColor:css("--line"),minimumWidth:70},
   timeScale:{borderColor:css("--line"),rightOffset:3,minBarSpacing:0.15,tickMarkFormatter:tick},crosshair:{mode:0},localization:{locale:"ko-KR",dateFormat:"yyyy-MM-dd"},
   handleScale:{axisPressedMouseMove:{time:true,price:false}}};}
 function candleOpts(){return {upColor:css("--up"),downColor:css("--dn"),borderUpColor:css("--up"),borderDownColor:css("--dn"),wickUpColor:css("--up"),wickDownColor:css("--dn")};}
@@ -320,6 +328,7 @@ function applyLive(j){if(!j||!j.d||!j.b)return false;var n=D.t.length;
   if(LI<0){if(j.d<=D.t[n-1])return false;D.t.push(j.d);LI=n;
     ["all","kospi","kosdaq"].forEach(function(g){D.b[g].o.push(null);D.b[g].c.push(null);});
     if(D.m)D.m.push(null);
+    if(D.n){D.n.val.push(null);D.n.pct.push(null);D.n.on.push(null);}
     Object.keys(D.p).forEach(function(k){var p=D.p[k];p.o.push(null);p.h.push(null);p.l.push(null);p.c.push(null);});}
   else if(j.d!==D.t[LI])return false;
   if(L&&L.run===j.run)return false;
@@ -333,7 +342,16 @@ function liveBox(){var el=document.getElementById("live");if(LI<0||!L){el.hidden
     +(b.all.c<5?" · <b class='up'>이대로 마감하면 5 밑 사건</b>":"");el.hidden=false;}
 function getLive(){return fetch("live.json?v="+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});}
 function poll(){getLive().then(function(j){if(!applyLive(j))return;var r=cb.timeScale().getVisibleLogicalRange();
-  sb.setData(bdata());sl.setData(ldata());sp.setData(pdata());if(sm)sm.setData(mdata());bmarks();if(r)cb.timeScale().setVisibleLogicalRange(r);legend(-1);liveBox();});}
+  sb.setData(bdata());sl.setData(ldata());sp.setData(pdata());if(sm)sm.setData(mdata());if(sn){snb.setData(nband());sn.setData(ndata());}bmarks();if(r)cb.timeScale().setVisibleLogicalRange(r);legend(-1);liveBox();});}
+function ndata(){var out=[];for(var i=0;i<D.t.length;i++){var v=D.n.pct[i];out.push(v==null?{time:D.t[i]}:{time:D.t[i],value:v});}return out;}
+function nband(){var out=[];for(var i=0;i<D.t.length;i++){var o=D.n.on[i];out.push({time:D.t[i],value:o?1:0});}return out;}
+function f2s(x){return x==null?"-":(x>=0?"+":"")+x.toFixed(2);}
+function nlegend(i){if(!sn)return;if(i<0){i=D.t.length-1;while(i>0&&D.n.pct[i]==null)i--;}var p=D.n.pct[i];
+  document.getElementById("ln").innerHTML=D.t[i]+" · NFCI 리스크 <b class='nf'>"+f2s(D.n.val[i])+"</b> · 최근 3년 중 <b class='nf'>"+(p==null?"-":p+"%")+"</b> · "+(D.n.on[i]?"<span class='non'>축소 중</span>":"정상");}
+function setNRefs(){nrefs.forEach(function(r){sn.removePriceLine(r);});nrefs=[];
+  nrefs.push(sn.createPriceLine({price:D.n.gate,color:css("--up"),lineWidth:1,lineStyle:0,axisLabelVisible:true,title:"축소 "+D.n.gate}));
+  nrefs.push(sn.createPriceLine({price:50,color:css("--ref"),lineWidth:1,lineStyle:2,axisLabelVisible:false,title:""}));}
+function nnote(){var w=D.n.now;document.getElementById("nqn").innerHTML="지금(기준일 "+D.n.asof+") NFCI 리스크 <b>"+f2s(w.val)+"</b>, 최근 3년 중 <b>"+w.pct+"%</b> 자리 · "+(w.on?"<b style='color:var(--up)'>축소 중</b>":"정상(축소 기준 "+D.n.gate+"%)");}
 function mdata(){var out=[];for(var i=0;i<D.t.length;i++){var v=D.m[i];out.push(v==null?{time:D.t[i]}:{time:D.t[i],value:v});}return out;}
 function mlegend(i){if(!sm)return;if(i<0){i=D.t.length-1;while(i>0&&D.m[i]==null)i--;}var v=D.m[i],j=i-1;while(j>=0&&D.m[j]==null)j--;
   var d=(v!=null&&j>=0)?v-D.m[j]:null,k=D.b[G].c[i],nm={all:"전체",kospi:"코스피",kosdaq:"코스닥"}[G];
@@ -373,7 +391,7 @@ function legend(i){var neg=i<0;if(i<0)i=D.t.length-1;var b=D.b[G],nm={all:"전�
   document.getElementById("lb").innerHTML=D.t[i]+" · "+nm+" 시가 "+f1(b.o[i])+" → 종가 <b>"+f1(b.c[i])+"</b>"+(d==null?"":" <span class='"+(d>=0?"up":"dn")+"'>("+(d>=0?"+":"")+d.toFixed(1)+")</span>")+(i===LI&&L?" · <span class='lv'>장중 추정 "+L.asof+"</span>":"");
   var p=D.p[P],c=p.c[i],j=i-1;while(j>=0&&p.c[j]==null)j--;var r=(c!=null&&j>=0)?(c/p.c[j]-1)*100:null;
   document.getElementById("lp").innerHTML=p.name+" · 종가 <b>"+fp(c)+"</b>"+(r==null?"":" <span class='"+(r>=0?"up":"dn")+"'>("+(r>=0?"+":"")+r.toFixed(2)+"%)</span>");
-  mlegend(neg?-1:i);}
+  mlegend(neg?-1:i);nlegend(neg?-1:i);}
 function setRefs(){refs.forEach(function(r){sb.removePriceLine(r);});refs=[];
   [["p5","하위5%"],["p50","가운데"],["p95","상위5%"]].forEach(function(q){refs.push(sb.createPriceLine({price:D.q[q[0]],color:css("--ref"),lineWidth:1,lineStyle:2,axisLabelVisible:true,title:q[1]}));});
   refs.push(sb.createPriceLine({price:5,color:css("--up"),lineWidth:1,lineStyle:0,axisLabelVisible:true,title:"극악 5"}));}
@@ -395,9 +413,18 @@ function build(){
     cm.priceScale("right").applyOptions({scaleMargins:{top:0.04,bottom:0.04}});
     sm.setData(mdata());setMRefs();mqnote();
   }else{document.getElementById("mcard").hidden=true;}
+  if(D.n&&D.n.pct&&D.n.pct.length===D.t.length){
+    cn=LightweightCharts.createChart(document.getElementById("cn"),opts(document.getElementById("cn").clientHeight));
+    snb=cn.addAreaSeries({priceScaleId:"band",priceLineVisible:false,lastValueVisible:false,crosshairMarkerVisible:false,lineColor:"rgba(0,0,0,0)",lineWidth:1,topColor:css("--band"),bottomColor:css("--band"),autoscaleInfoProvider:function(){return {priceRange:{minValue:0.02,maxValue:1}};}});   // 0은 칸 밑으로 숨김(빈칸으로 두면 area가 이어 칠해짐)
+    cn.priceScale("band").applyOptions({scaleMargins:{top:0,bottom:0},visible:false});
+    sn=cn.addLineSeries({color:css("--nf"),lineWidth:2,priceLineVisible:false,lastValueVisible:true,priceFormat:{type:"price",precision:0,minMove:1},autoscaleInfoProvider:function(){return {priceRange:{minValue:0,maxValue:100}};}});
+    cn.priceScale("right").applyOptions({scaleMargins:{top:0.04,bottom:0.04}});
+    snb.setData(nband());sn.setData(ndata());setNRefs();nnote();
+  }else{document.getElementById("ncard").hidden=true;}
   // 세 차트(브레드스·가격·MMTW)는 D.t 같은 칸 수라 논리 범위·십자선을 그대로 맞춘다 (11/06 MMTW 칸 추가로 둘 → 셋)
   var lock=false,CH=[{c:cb,s:sb,v:function(i){return D.b[G].c[i];}},{c:cp,s:sp,v:function(i){return D.p[P].c[i];}}];
   if(cm)CH.push({c:cm,s:sm,v:function(i){return D.m[i];}});
+  if(cn)CH.push({c:cn,s:sn,v:function(i){return D.n.pct[i];}});   // 11/06 NFCI 칸 → 넷
   CH.forEach(function(a){a.c.timeScale().subscribeVisibleLogicalRangeChange(function(r){if(!r||lock)return;lock=true;CH.forEach(function(b){if(b!==a)b.c.timeScale().setVisibleLogicalRange(r);});lock=false;});});
   CH.forEach(function(src){src.c.subscribeCrosshairMove(function(pr){
     if(!pr||!pr.time){CH.forEach(function(d){if(d!==src)d.c.clearCrosshairPosition();});legend(-1);return;}
@@ -409,7 +436,8 @@ function build(){
   document.querySelectorAll("[data-r]").forEach(function(b){b.onclick=function(){press("[data-r]",b);range(+b.dataset.r);};});
   var mq=window.matchMedia("(prefers-color-scheme: dark)");
   function retheme(){[cb,cp].forEach(function(c,k){c.applyOptions(opts(document.getElementById(k?"cp":"cb").clientHeight));});sb.applyOptions(candleOpts());sp.applyOptions(candleOpts());sl.applyOptions({color:css("--sub")});setRefs();bmarks();pmarks();
-    if(cm){cm.applyOptions(opts(document.getElementById("cm").clientHeight));sm.applyOptions({color:css("--us")});setMRefs();}}
+    if(cm){cm.applyOptions(opts(document.getElementById("cm").clientHeight));sm.applyOptions({color:css("--us")});setMRefs();}
+    if(cn){cn.applyOptions(opts(document.getElementById("cn").clientHeight));sn.applyOptions({color:css("--nf")});snb.applyOptions({topColor:css("--band"),bottomColor:css("--band")});setNRefs();}}
   if(mq.addEventListener)mq.addEventListener("change",retheme);
 }
 Promise.all([fetch("data.json?v="+Date.now()).then(function(r){return r.json();}),getLive()]).then(function(a){D=a[0];applyLive(a[1]);build();liveBox();
