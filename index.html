@@ -9,9 +9,9 @@
 <meta name="theme-color" content="#111827">
 <link rel="icon" href="data:,">
 <style>
-:root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--sub:#6b7280;--line:#e5e7eb;--grid:#eef0f3;--up:#e5484d;--dn:#3b82f6;--chip:#eef0f3;--chip-on:#111827;--chip-on-ink:#fff;--ref:#9ca3af;--fx-marker:#fde68a}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412}}
-:root[data-theme="dark"]{--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412}
+:root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--sub:#6b7280;--line:#e5e7eb;--grid:#eef0f3;--up:#e5484d;--dn:#3b82f6;--chip:#eef0f3;--chip-on:#111827;--chip-on-ink:#fff;--ref:#9ca3af;--fx-marker:#fde68a;--us:#c2410c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c}}
+:root[data-theme="dark"]{--bg:#0b0f17;--card:#141a24;--ink:#e5e7eb;--sub:#9ca3af;--line:#232b38;--grid:#1b2230;--chip:#1f2733;--chip-on:#e5e7eb;--chip-on-ink:#0b0f17;--ref:#6b7280;--fx-marker:#6b5412;--us:#fb923c}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 -apple-system,"Apple SD Gothic Neo","Noto Sans KR",system-ui,sans-serif}
 main{max-width:960px;margin:0 auto;padding:16px}
@@ -35,7 +35,8 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 .chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-ink);font-weight:600}
 .legend{font-size:13px;min-height:20px;color:var(--sub);margin:2px 2px 4px;font-variant-numeric:tabular-nums}
 .legend b{color:var(--ink)}
-#cb{height:320px}#cp{height:220px}
+#cb{height:320px}#cp{height:220px}#cm{height:220px}
+.legend b.us{color:var(--us)}
 .pt{font-size:13px;font-weight:600;margin:10px 2px 2px}
 .foot{font-size:12px;color:var(--sub);margin:14px 2px 24px;line-height:1.7}
 .foot p{margin:0 0 6px}
@@ -50,7 +51,7 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 :root{--live:#f59e0b}
 .live{flex-basis:100%;font-size:13px;color:var(--sub);border-top:1px dashed var(--line);padding-top:8px;font-variant-numeric:tabular-nums}
 .live b{color:var(--ink)}.live b.up{color:var(--up)}.lv{color:var(--live);font-weight:600}
-@media (max-width:520px){.big .v{font-size:34px}#cb{height:280px}#cp{height:190px}.mini{min-width:0;flex:1}.minis{width:100%}}
+@media (max-width:520px){.big .v{font-size:34px}#cb{height:280px}#cp{height:190px}#cm{height:190px}.mini{min-width:0;flex:1}.minis{width:100%}}
 .fx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .fx-caret{display:inline-block;width:.07em;height:1em;margin-left:.08em;vertical-align:-.12em;background:currentColor;animation:fx-blink 1s steps(1) infinite}
 @keyframes fx-blink{50%{opacity:0}}
@@ -119,10 +120,17 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
   <p class="err" id="err" hidden></p>
 </section>
 
+<section class="card" id="mcard">
+  <div class="pt" style="margin-top:0">미국 MMTW <span style="font-weight:400;color:var(--sub)">(미국 전 종목 중 20일선 위 비율 · 비교용)</span></div>
+  <div class="legend" id="lm">&nbsp;</div>
+  <div id="cm"></div>
+  <p class="rule">위 두 차트와 날짜 이동·십자선이 같이 움직여요. 날짜는 미국 날짜 그대로라, 같은 날짜의 한국 장이 끝난 뒤에 열린 미국 장 값이에요(한국 오늘 봉은 미국 «어제» 값을 보고 움직여요). 트뷰 INDEX:MMTW 확정값으로 평일 16시쯤 갱신해요.</p>
+</section>
+
 <div class="foot">
   <p>캔들은 시가 브레드스에서 종가 브레드스까지예요(꼬리 없음). 시가 브레드스 = 그날 시가가 «직전 19일 종가 + 그날 시가» 평균보다 위인 비율, 종가 브레드스 = 종가가 20일 종가 평균보다 위인 비율.</p>
   <p>2015년 전(2002-01~)은 상장폐지 645종목을 넣어 다시 만든 종가 브레드스라 선으로만 보여요(2002~2005 상폐 일부는 자료가 없어 빠졌어요). 빨간 실선이 5, 점선은 2002-01 이후 전체 계열의 하위 5%(15.0) · 가운데(44.9) · 상위 5%(75.7)예요. 차트를 왼쪽으로 끌거나 «전체»를 누르면 과거 값을 볼 수 있어요. 손가락이나 마우스를 올리면 그날 값이 위에 떠요.</p>
-  <p>대상은 오늘 상장된 보통주(스팩·우선주·리츠 제외)라 상장폐지 종목이 빠져 있어요. 2015~2026-08 상폐 280종목을 넣어 다시 재면 평균 0.6 낮았어요. 종가는 KRX 정규장 값(2026-09 이후 넥스트레이드 애프터마켓 가격을 걷어냄), 평일 16시쯤 갱신해요. 장중(09:30~15:30)엔 1시간마다 트뷰 20분 늦은 값으로 오늘 칸에 주황색 «추정 봉»을 그리고, 16시쯤 확정 봉으로 바뀌어요.</p>
+  <p>대상은 오늘 상장된 보통주(스팩·우선주·리츠 제외)라 상장폐지 종목이 빠져 있어요. 2015~2026-08 상폐 280종목을 넣어 다시 재면 평균 0.6 낮았어요. 종가는 KRX 정규장 값(2026-09 이후 넥스트레이드 애프터마켓 가격을 걷어냄), 평일 16시쯤 갱신해요. 장중(09:30~15:30)엔 30분마다 트뷰 20분 늦은 값으로 오늘 칸에 주황색 «추정 봉»을 그리고, 16시쯤 확정 봉으로 바뀌어요.</p>
 </div>
 </main>
 <script src="https://unpkg.com/lightweight-charts@4.2.0/dist/lightweight-charts.standalone.production.js"></script>
@@ -296,7 +304,7 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 </script>
 <script>
 (function(){
-var D=null,G="all",P="KS11",cb,cp,sb,sl,sp,refs=[],L=null,LI=-1;
+var D=null,G="all",P="KS11",cb,cp,cm=null,sb,sl,sp,sm=null,refs=[],mrefs=[],L=null,LI=-1;
 function css(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim();}
 function tick(t,k){var d=typeof t==="string"?t.split("-"):[t.year,t.month,t.day];if(k===0)return String(d[0]);if(k===1)return (+d[1])+"월";return (+d[1])+"/"+(+d[2]);}
 function opts(h){return {height:h,autoSize:true,layout:{background:{type:"solid",color:css("--card")},textColor:css("--sub"),fontSize:11,attributionLogo:false},
@@ -310,6 +318,7 @@ function livecol(x,i){if(i===LI){var k=css("--live");x.color=k;x.borderColor=k;x
 function applyLive(j){if(!j||!j.d||!j.b)return false;var n=D.t.length;
   if(LI<0){if(j.d<=D.t[n-1])return false;D.t.push(j.d);LI=n;
     ["all","kospi","kosdaq"].forEach(function(g){D.b[g].o.push(null);D.b[g].c.push(null);});
+    if(D.m)D.m.push(null);
     Object.keys(D.p).forEach(function(k){var p=D.p[k];p.o.push(null);p.h.push(null);p.l.push(null);p.c.push(null);});}
   else if(j.d!==D.t[LI])return false;
   if(L&&L.run===j.run)return false;
@@ -318,12 +327,18 @@ function applyLive(j){if(!j||!j.d||!j.b)return false;var n=D.t.length;
   return true;}
 function liveBox(){var el=document.getElementById("live");if(LI<0||!L){el.hidden=true;return;}
   var b=L.b,pa=D.b.all.c[LI-1],d=(pa==null)?null:b.all.c-pa;
-  el.innerHTML="<span class='lv'>📡 장중 추정 "+(+L.d.slice(5,7))+"/"+(+L.d.slice(8))+" "+L.asof+"</span> (트뷰 20분 늦은 값, 1시간마다) · 전체 <b>"+f1(b.all.c)+"</b>"
+  el.innerHTML="<span class='lv'>📡 장중 추정 "+(+L.d.slice(5,7))+"/"+(+L.d.slice(8))+" "+L.asof+"</span> (트뷰 20분 늦은 값, 30분마다) · 전체 <b>"+f1(b.all.c)+"</b>"
     +(d==null?"":" <span class='"+(d>=0?"up":"dn")+"'>("+(d>=0?"+":"")+d.toFixed(1)+")</span>")+" · 코스피 "+f1(b.kospi.c)+" · 코스닥 "+f1(b.kosdaq.c)
     +(b.all.c<5?" · <b class='up'>이대로 마감하면 5 밑 사건</b>":"");el.hidden=false;}
 function getLive(){return fetch("live.json?v="+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});}
 function poll(){getLive().then(function(j){if(!applyLive(j))return;var r=cb.timeScale().getVisibleLogicalRange();
-  sb.setData(bdata());sl.setData(ldata());sp.setData(pdata());bmarks();if(r)cb.timeScale().setVisibleLogicalRange(r);legend(-1);liveBox();});}
+  sb.setData(bdata());sl.setData(ldata());sp.setData(pdata());if(sm)sm.setData(mdata());bmarks();if(r)cb.timeScale().setVisibleLogicalRange(r);legend(-1);liveBox();});}
+function mdata(){var out=[];for(var i=0;i<D.t.length;i++){var v=D.m[i];out.push(v==null?{time:D.t[i]}:{time:D.t[i],value:v});}return out;}
+function mlegend(i){if(!sm)return;if(i<0){i=D.t.length-1;while(i>0&&D.m[i]==null)i--;}var v=D.m[i],j=i-1;while(j>=0&&D.m[j]==null)j--;
+  var d=(v!=null&&j>=0)?v-D.m[j]:null,k=D.b[G].c[i],nm={all:"전체",kospi:"코스피",kosdaq:"코스닥"}[G];
+  document.getElementById("lm").innerHTML=D.t[i]+" · 미국 MMTW <b class='us'>"+f1(v)+"</b>"+(d==null?"":" <span class='"+(d>=0?"up":"dn")+"'>("+(d>=0?"+":"")+d.toFixed(1)+")</span>")+" · 한국 "+nm+" "+f1(k);}
+function setMRefs(){mrefs.forEach(function(r){sm.removePriceLine(r);});mrefs=[];
+  [20,50,80].forEach(function(v){mrefs.push(sm.createPriceLine({price:v,color:css("--ref"),lineWidth:1,lineStyle:2,axisLabelVisible:true,title:String(v)}));});}
 function ldata(){var b=D.b[G],out=[],k=idxOf(D.c0);for(var i=0;i<D.t.length;i++){var c=b.c[i];
   if(c==null||i>k){out.push({time:D.t[i]});continue;} out.push({time:D.t[i],value:c});}return out;}
 function bmarks(){var k=idxOf(D.c0),a=[],b=[];D.ev.forEach(function(e){var m={time:e.d,position:"belowBar",color:css("--up"),shape:"arrowUp",text:"5 밑 "+e.v};
@@ -344,11 +359,12 @@ function pfmt(){var k=P.charAt(0)=="K";sp.applyOptions({priceFormat:{type:"price
 function f1(x){return x==null?"-":x.toFixed(1);}
 function fp(x){if(x==null)return "-";return P.charAt(0)=="K"?x.toLocaleString("ko-KR",{minimumFractionDigits:2,maximumFractionDigits:2}):x.toLocaleString("ko-KR")+"원";}
 function idxOf(t){var lo=0,hi=D.t.length-1;while(lo<=hi){var m=(lo+hi)>>1;if(D.t[m]<t)lo=m+1;else if(D.t[m]>t)hi=m-1;else return m;}return -1;}
-function legend(i){if(i<0)i=D.t.length-1;var b=D.b[G],nm={all:"전체",kospi:"코스피",kosdaq:"코스닥"}[G];
+function legend(i){var neg=i<0;if(i<0)i=D.t.length-1;var b=D.b[G],nm={all:"전체",kospi:"코스피",kosdaq:"코스닥"}[G];
   var d=(i>0&&b.c[i-1]!=null&&b.c[i]!=null)?b.c[i]-b.c[i-1]:null;
   document.getElementById("lb").innerHTML=D.t[i]+" · "+nm+" 시가 "+f1(b.o[i])+" → 종가 <b>"+f1(b.c[i])+"</b>"+(d==null?"":" <span class='"+(d>=0?"up":"dn")+"'>("+(d>=0?"+":"")+d.toFixed(1)+")</span>")+(i===LI&&L?" · <span class='lv'>장중 추정 "+L.asof+"</span>":"");
   var p=D.p[P],c=p.c[i],j=i-1;while(j>=0&&p.c[j]==null)j--;var r=(c!=null&&j>=0)?(c/p.c[j]-1)*100:null;
-  document.getElementById("lp").innerHTML=p.name+" · 종가 <b>"+fp(c)+"</b>"+(r==null?"":" <span class='"+(r>=0?"up":"dn")+"'>("+(r>=0?"+":"")+r.toFixed(2)+"%)</span>");}
+  document.getElementById("lp").innerHTML=p.name+" · 종가 <b>"+fp(c)+"</b>"+(r==null?"":" <span class='"+(r>=0?"up":"dn")+"'>("+(r>=0?"+":"")+r.toFixed(2)+"%)</span>");
+  mlegend(neg?-1:i);}
 function setRefs(){refs.forEach(function(r){sb.removePriceLine(r);});refs=[];
   [["p5","하위5%"],["p50","가운데"],["p95","상위5%"]].forEach(function(q){refs.push(sb.createPriceLine({price:D.q[q[0]],color:css("--ref"),lineWidth:1,lineStyle:2,axisLabelVisible:true,title:q[1]}));});
   refs.push(sb.createPriceLine({price:5,color:css("--up"),lineWidth:1,lineStyle:0,axisLabelVisible:true,title:"극악 5"}));}
@@ -364,18 +380,27 @@ function build(){
   cp.priceScale("right").applyOptions({mode:1});
   pfmt();
   sb.setData(bdata());sl.setData(ldata());sp.setData(pdata());setRefs();bmarks();pmarks();evchips();
-  var lock=false;
-  function link(a,b){a.timeScale().subscribeVisibleLogicalRangeChange(function(r){if(!r||lock)return;lock=true;b.timeScale().setVisibleLogicalRange(r);lock=false;});}
-  link(cb,cp);link(cp,cb);
-  function cross(src,dst,dstS,isB){src.subscribeCrosshairMove(function(pr){if(!pr||!pr.time){dst.clearCrosshairPosition();legend(-1);return;}
-    var i=idxOf(pr.time);legend(i);var v=isB?D.p[P].c[i]:D.b[G].c[i];if(v==null){dst.clearCrosshairPosition();return;}dst.setCrosshairPosition(v,pr.time,dstS);});}
-  cross(cb,cp,sp,true);cross(cp,cb,sb,false);
+  if(D.m&&D.m.length===D.t.length){
+    cm=LightweightCharts.createChart(document.getElementById("cm"),opts(document.getElementById("cm").clientHeight));
+    sm=cm.addLineSeries({color:css("--us"),lineWidth:2,priceLineVisible:false,lastValueVisible:true,priceFormat:{type:"price",precision:1,minMove:0.1},autoscaleInfoProvider:function(){return {priceRange:{minValue:0,maxValue:100}};}});
+    cm.priceScale("right").applyOptions({scaleMargins:{top:0.04,bottom:0.04}});
+    sm.setData(mdata());setMRefs();
+  }else{document.getElementById("mcard").hidden=true;}
+  // 세 차트(브레드스·가격·MMTW)는 D.t 같은 칸 수라 논리 범위·십자선을 그대로 맞춘다 (11/06 MMTW 칸 추가로 둘 → 셋)
+  var lock=false,CH=[{c:cb,s:sb,v:function(i){return D.b[G].c[i];}},{c:cp,s:sp,v:function(i){return D.p[P].c[i];}}];
+  if(cm)CH.push({c:cm,s:sm,v:function(i){return D.m[i];}});
+  CH.forEach(function(a){a.c.timeScale().subscribeVisibleLogicalRangeChange(function(r){if(!r||lock)return;lock=true;CH.forEach(function(b){if(b!==a)b.c.timeScale().setVisibleLogicalRange(r);});lock=false;});});
+  CH.forEach(function(src){src.c.subscribeCrosshairMove(function(pr){
+    if(!pr||!pr.time){CH.forEach(function(d){if(d!==src)d.c.clearCrosshairPosition();});legend(-1);return;}
+    var i=idxOf(pr.time);legend(i);
+    CH.forEach(function(d){if(d===src)return;var v=d.v(i);if(v==null)d.c.clearCrosshairPosition();else d.c.setCrosshairPosition(v,pr.time,d.s);});});});
   range(250);legend(-1);
   document.querySelectorAll("[data-g]").forEach(function(b){b.onclick=function(){G=b.dataset.g;press("[data-g]",b);var r=cb.timeScale().getVisibleLogicalRange();sb.setData(bdata());sl.setData(ldata());bmarks();if(r)cb.timeScale().setVisibleLogicalRange(r);legend(-1);};});
   document.querySelectorAll("[data-p]").forEach(function(b){b.onclick=function(){P=b.dataset.p;press("[data-p]",b);var r=cb.timeScale().getVisibleLogicalRange();pfmt();sp.setData(pdata());pmarks();if(r)cp.timeScale().setVisibleLogicalRange(r);legend(-1);};});
   document.querySelectorAll("[data-r]").forEach(function(b){b.onclick=function(){press("[data-r]",b);range(+b.dataset.r);};});
   var mq=window.matchMedia("(prefers-color-scheme: dark)");
-  function retheme(){[cb,cp].forEach(function(c,k){c.applyOptions(opts(document.getElementById(k?"cp":"cb").clientHeight));});sb.applyOptions(candleOpts());sp.applyOptions(candleOpts());sl.applyOptions({color:css("--sub")});setRefs();bmarks();pmarks();}
+  function retheme(){[cb,cp].forEach(function(c,k){c.applyOptions(opts(document.getElementById(k?"cp":"cb").clientHeight));});sb.applyOptions(candleOpts());sp.applyOptions(candleOpts());sl.applyOptions({color:css("--sub")});setRefs();bmarks();pmarks();
+    if(cm){cm.applyOptions(opts(document.getElementById("cm").clientHeight));sm.applyOptions({color:css("--us")});setMRefs();}}
   if(mq.addEventListener)mq.addEventListener("change",retheme);
 }
 Promise.all([fetch("data.json?v="+Date.now()).then(function(r){return r.json();}),getLive()]).then(function(a){D=a[0];applyLive(a[1]);build();liveBox();
