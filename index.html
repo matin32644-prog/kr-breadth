@@ -48,10 +48,23 @@ h1{font-size:20px;margin:4px 2px 2px;letter-spacing:-.3px}
 .evs .chip{font-variant-numeric:tabular-nums}
 .evs .chip i{font-style:normal;color:var(--up);margin-left:4px;font-weight:600}
 .rule{font-size:12px;color:var(--sub);margin:10px 0 0;line-height:1.6}
-:root{--live:#f59e0b}
-.live{flex-basis:100%;font-size:13px;color:var(--sub);border-top:1px dashed var(--line);padding-top:8px;font-variant-numeric:tabular-nums}
-.live b{color:var(--ink)}.live b.up{color:var(--up)}.lv{color:var(--live);font-weight:600}
-#mlive{border-top:0;padding-top:0;margin:2px 0 6px;line-height:1.55}
+:root{--live:#f59e0b;--live-bg:#f59e0b14}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--live-bg:#f59e0b1f}}
+:root[data-theme="dark"]{--live-bg:#f59e0b1f}
+/* 11/20 12539 «B» 주황 추정 상자: 직전 확정 → 지금 추정(주황 큰 숫자) + 변화 알약(빨강 오름·파랑 내림·회색 0) */
+.live{flex-basis:100%;font-variant-numeric:tabular-nums}.lv{color:var(--live);font-weight:600}
+.lbx{background:var(--live-bg);border:1px dashed var(--live);border-radius:12px;padding:10px 12px}
+.lhd{font-size:12px;color:var(--sub)}
+.lflow{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;margin:2px 0}
+.lfrom{font-size:14px;color:var(--sub)}.lfrom b{color:var(--ink);font-weight:600}
+.larr{color:var(--sub)}
+.lnow{font-size:34px;font-weight:800;letter-spacing:-.8px;line-height:1.1;color:var(--live)}
+.lpill{font-size:15px;font-weight:800;border-radius:999px;padding:2px 10px;background:var(--chip);color:var(--ink)}
+.lpill.up{background:var(--up);color:#fff}.lpill.dn{background:var(--dn);color:#fff}
+.lbad{font-size:12px;font-weight:700;border-radius:999px;padding:2px 9px;color:#fff;background:var(--up)}.lbad.w{background:var(--warn);color:#111827}
+.lsub{font-size:14px;color:var(--sub);display:flex;flex-wrap:wrap;gap:4px 12px}
+.lsub b{color:var(--ink);font-size:16px;font-weight:700}.lsub i{font-style:normal;font-weight:700}.lsub i.fl{color:var(--sub)}
+#mlive{margin:4px 0 8px}
 @media (max-width:520px){.big .v{font-size:34px}#cb{height:280px}#cp{height:190px}#cm,#cn{height:190px}.mini{min-width:0;flex:1}.minis{width:100%}}
 .fx-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
 .fx-caret{display:inline-block;width:.07em;height:1em;margin-left:.08em;vertical-align:-.12em;background:currentColor;animation:fx-blink 1s steps(1) infinite}
@@ -339,11 +352,19 @@ function applyLive(j){if(!j||!j.d||!j.b)return false;var n=D.t.length;
   L=j;["all","kospi","kosdaq"].forEach(function(g){if(j.b[g]){D.b[g].o[LI]=j.b[g].o;D.b[g].c[LI]=j.b[g].c;}});
   Object.keys(D.p).forEach(function(k){var x=j.p&&j.p[k],p=D.p[k];if(x){p.o[LI]=x.o;p.h[LI]=x.h;p.l[LI]=x.l;p.c[LI]=x.c;}});
   return true;}
+// 오르내림은 표시 자릿수(소수 첫째) 반올림 뒤에 판정(부스터 페이지와 같음). 0이면 회색 ±0.0
+function dr(d){var r=Math.round(d*10)/10;return r>0?"up":(r<0?"dn":"fl");}
+function sg(d){var r=Math.round(d*10)/10;return (r>0?"+":(r<0?"−":"±"))+Math.abs(r).toFixed(1);}
+function md2(s){return (+s.slice(5,7))+"/"+(+s.slice(8));}
+function pill(d){return d==null?"":"<span class='lpill "+dr(d)+"'>"+sg(d)+"</span>";}
 function liveBox(){var el=document.getElementById("live");if(LI<0||!L){el.hidden=true;return;}
-  var b=L.b,pa=D.b.all.c[LI-1],d=(pa==null)?null:b.all.c-pa;
-  el.innerHTML="<span class='lv'>📡 장중 추정 "+(+L.d.slice(5,7))+"/"+(+L.d.slice(8))+" "+L.asof+"</span> (트뷰 20분 늦은 값, 30분마다) · 전체 <b>"+f1(b.all.c)+"</b>"
-    +(d==null?"":" <span class='"+(d>=0?"up":"dn")+"'>("+(d>=0?"+":"")+d.toFixed(1)+")</span>")+" · 코스피 "+f1(b.kospi.c)+" · 코스닥 "+f1(b.kosdaq.c)
-    +(b.all.c<5?" · <b class='up'>이대로 마감하면 5 밑 사건</b>":"");el.hidden=false;}
+  var b=L.b,pv=function(g){return D.b[g].c[LI-1];},dd=function(g){var p=pv(g),x=b[g]&&b[g].c;return (p==null||x==null)?null:x-p;};
+  var sm=function(nm,g){var x=b[g]&&b[g].c,d=dd(g);return "<span>"+nm+" <b>"+f1(x)+"</b>"+(d==null?"":" <i class='"+dr(d)+"'>"+sg(d)+"</i>")+"</span>";};
+  var pa=pv("all");
+  el.innerHTML="<div class='lbx'><div class='lhd'><span class='lv'>📡 장중 추정 "+md2(L.d)+" "+L.asof+"</span> · 트뷰 20분 늦은 값 · 30분마다</div>"
+    +"<div class='lflow'>"+(pa==null?"":"<span class='lfrom'>"+md2(D.t[LI-1])+" 확정 전체 <b>"+f1(pa)+"</b></span><span class='larr'>→</span>")
+    +"<b class='lnow'>"+f1(b.all.c)+"</b>"+pill(dd("all"))+(b.all.c!=null&&b.all.c<5?"<span class='lbad'>이대로 마감하면 5 밑 사건</span>":"")+"</div>"
+    +"<div class='lsub'>"+sm("코스피","kospi")+sm("코스닥","kosdaq")+"</div></div>";el.hidden=false;}
 function getLive(){return fetch("live.json?v="+Date.now()).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});}
 function getUS(){return fetch(UURL+(UURL.indexOf("?")<0?"?":"&")+"t="+Date.now(),{cache:"no-store"}).then(function(r){return r.ok?r.json():null;}).catch(function(){return null;});}
 function poll(){Promise.all([getLive(),getUS()]).then(function(a){var ch=applyLive(a[0]),uj=a[1],uch=!!(uj&&(!BU||JSON.stringify(uj.us)!==JSON.stringify(BU.us)));if(uch)BU=uj;
@@ -363,10 +384,11 @@ function usDraw(){if(!sm)return;usCalc();
   else{su.setData([]);su.setMarkers([]);}
   usBox();}
 function usBox(){var el=document.getElementById("mlive");if(!U){el.hidden=true;return;}
-  var pv=D.m[U.j],d=(pv==null)?null:U.v-pv,r=mrank(U.v),md=function(s){return (+s.slice(5,7))+"/"+(+s.slice(8));};
-  el.innerHTML=(U.kind==="conf"?"<span class='lv'>🇺🇸 미국 "+md(U.d)+" 장 마감 확정</span> (페이지 자료엔 평일 16시쯤 들어가요)":"<span class='lv'>📡 미국 "+md(U.d)+" 장중 추정</span> (한국 시각 "+U.t+" 시세 · 트뷰 15분 늦은 값 · 15분마다)")
-    +" · MMTW <b>"+f1(U.v)+"</b>"+(d==null?"":" <span class='"+(d>=0?"up":"dn")+"'>("+md(D.mq.l)+" 확정 "+f1(pv)+" 대비 "+(d>=0?"+":"")+d.toFixed(1)+")</span>")
-    +(r==null?"":" · 하위 "+fpct(r)+"%")+(U.v<10?" · <b class='up'>10 밑</b>":(U.v<20?" · <b style='color:var(--warn)'>20 밑</b>":""));el.hidden=false;}
+  var pv=D.m[U.j],d=(pv==null)?null:U.v-pv,r=mrank(U.v);
+  el.innerHTML="<div class='lbx'><div class='lhd'>"+(U.kind==="conf"?"<span class='lv'>🇺🇸 미국 "+md2(U.d)+" 장 마감 확정</span> · 페이지 자료엔 평일 16시쯤 들어가요":"<span class='lv'>📡 미국 "+md2(U.d)+" 장중 추정</span> · 한국 시각 "+U.t+" 시세 · 트뷰 15분 늦은 값 · 15분마다")+"</div>"
+    +"<div class='lflow'>"+(pv==null?"":"<span class='lfrom'>"+md2(D.mq.l)+" 확정 MMTW <b>"+f1(pv)+"</b></span><span class='larr'>→</span>")
+    +"<b class='lnow'>"+f1(U.v)+"</b>"+pill(d)+(U.v<10?"<span class='lbad'>10 밑</span>":(U.v<20?"<span class='lbad w'>20 밑</span>":""))+"</div>"
+    +(r==null?"":"<div class='lsub'><span>"+D.mq.f.slice(0,4)+"년 뒤 하위 <b>"+fpct(r)+"%</b></span></div>")+"</div>";el.hidden=false;}
 function ndata(){var out=[];for(var i=0;i<D.t.length;i++){var v=D.n.pct[i];out.push(v==null?{time:D.t[i]}:{time:D.t[i],value:v});}return out;}
 function nband(){var out=[];for(var i=0;i<D.t.length;i++){var o=D.n.on[i];out.push({time:D.t[i],value:o?1:0});}return out;}
 function f2s(x){return x==null?"-":(x>=0?"+":"")+x.toFixed(2);}
